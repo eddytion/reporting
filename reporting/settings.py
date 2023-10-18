@@ -3,6 +3,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'f1ivfunmwDX41NTl4xjNpfz/p6yzoDhoS2bMkA9JHOjfiXfzGNV252ioE/DTKRuMVmvCYyX+Yo/V'
 DEBUG = True
+from datetime import timedelta
 
 ALLOWED_HOSTS = []
 
@@ -85,3 +86,12 @@ USE_TZ = True
 STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+CELERY_BEAT_SCHEDULE = {
+    'import-data-every-30-minutes': {
+        'task': 'resource_reports.tasks.import_data',
+        'schedule': timedelta(minutes=30),
+    },
+}

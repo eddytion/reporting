@@ -14,7 +14,7 @@ class ManagedSystemVM(models.Model):
     lpar_ip = models.GenericIPAddressField("Lpar IP Address", null=True, blank=True)
     rmc_state = models.CharField("RMC State", max_length=20, null=True, blank=True)
     curr_lpar_proc_compat_mode = models.CharField("Proc Compat Mode", max_length=20, null=True, blank=True)
-    lpar_id = models.CharField("LPAR ID", null=True, blank=True)
+    lpar_id = models.IntegerField("LPAR ID", null=True, blank=True)
 
     class Meta:
         verbose_name_plural = "LPAR Inventory"
@@ -39,7 +39,7 @@ class MemoryCpuVM(models.Model):
     min_procs = models.FloatField("Min Procs", null=True, blank=True)
     desired_procs = models.FloatField("Desired Procs", null=True, blank=True)
     max_procs = models.FloatField("Max Procs", null=True, blank=True)
-    sharing_mode = models.CharField("Sharing Mode", null=True, blank=True)
+    sharing_mode = models.CharField("Sharing Mode", max_length=150, null=True, blank=True)
     uncap_weight = models.FloatField("Uncapped Weight", default=128, null=True, blank=True)
 
     class Meta:
@@ -75,7 +75,7 @@ class ManagedSystemMemory(models.Model):
     configurable_sys_mem = models.FloatField("Configurable Memory", null=True, blank=True)
     curr_avail_sys_mem = models.FloatField("Available Memory", null=True, blank=True)
     deconfig_sys_mem = models.FloatField("Deconfigured Memory", null=True, blank=True)
-    sys_firmware_mem = models.CharField("System Firmware Memory", null=True, blank=True)
+    sys_firmware_mem = models.FloatField("System Firmware Memory", null=True, blank=True)
     mem_region_size = models.FloatField("Memory Region Size", default=256, null=True, blank=True)
 
     class Meta:
